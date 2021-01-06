@@ -64,7 +64,7 @@ function optionChanged() {
 
       var demographics = d3.select("#sample-metadata")
       sampleMeta.forEach((buttonpicker) => {
-          // menu.html("");
+          demographics.html("");
           var row = demographics.append("tr");
           Object.entries(buttonpicker).forEach(([key, value]) => {
             var cell = row.append("tr");
