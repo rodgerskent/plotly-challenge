@@ -9,6 +9,7 @@ d3.json("samples.json").then(function(object) {
     var subject = object.names;
     console.log("subject Variable with array of Subject ID's");
     console.log(subject);
+    
 
     // menu.html("");
 
@@ -28,68 +29,49 @@ d3.json("samples.json").then(function(object) {
 });
 
 
+// Starter from UFO Level 1 to act on a change in the drop down menu
+var button = d3.select("#selDataset");
+var form = d3.select("form");
+form.on("submit",runEnter);
 
-// // Starter code from UFO Level 1 to build a drop down menu
-// var subject = object.names;
-// var menuList = subject;
-// console.log("menuList of Subjects here for menu list")
-// console.log(menuList);
-// var menu = d3.select("option")
-// subject.forEach((menuList) => {
-//     menu.html("");
-//     var row = menu.append("option");
-//     Object.entries(subject).forEach(([value]) => {
-//       var cell = row.append("option");
-//       cell.text(value);
-//     });
-// });
+function optionChanged() {
+    //d3.event.preventDefault();
+    var inputElement = d3.select("#selDataset");
+    console.log('Selected Subject ID Element')
+    console.log(inputElement);
+    var inputValue = inputElement.property("value");
+    console.log('Selected Subject ID Value')
+    console.log(inputValue);
 
-// // Select the button
-// var button = d3.select("#filter-btn");
+    d3.json("samples.json").then(function(object) {
+      console.log("metadata drill");
+      console.log(object.metadata);
+      console.log("metadata variable below");
+      var metadata = object.metadata;
+      console.log(metadata)
 
-// // Select the form
-// // var form = d3.select("#datetime");
-// var form = d3.select("form");
+      function fnsampleMeta(metadata) {
+        return metadata.id === 970;
+      }
 
-// // Create event handlers for clicking the button or pressing the enter key
-// //button.on("click", runEnter);
-// form.on("submit",runEnter);
+      var sampleMeta = metadata.filter(fnsampleMeta);
+      console.log("sampleMeta variable below")
+      console.log(sampleMeta)
 
-// // Create the function to run for both events
-// function runEnter() {
+      // menu.html("");
 
-//     // // Prevent the page from refreshing
-//     d3.event.preventDefault();
-
-//     // Then, select the unordered list element by class name
-//     // var list = d3.select("tr");
-
-//     // remove any children from the list to
-   
-     
-//     // Select the input element and get the raw HTML node
-//     var inputElement = d3.select("#datetime");
-//     console.log(inputElement);
-
-//     // Get the value property of the input element
-//     var inputValue = inputElement.property("value");
-//     console.log(inputValue);
-
-//     // if inputvalue is nan then pass
-//     if (inputValue) {
-//       tbody.html("");
-//       var filteredData = startData.filter(item => item.datetime === inputValue);
-//       console.log(filteredData);
-//       filteredData.forEach((targetdate) => {
-//         var row = tbody.append("tr");
-//         Object.entries(targetdate).forEach(([key, value]) => {
-//           var cell = row.append("td");
-//           cell.text(value);
-//         });
-//       });
-//     }
+      var demographics = d3.select("#sample-metadata")
+      sampleMeta.forEach((buttonpicker) => {
+          // menu.html("");
+          var row = demographics.append("tr");
+          Object.entries(buttonpicker).forEach(([key, value]) => {
+            var cell = row.append("tr");
+            cell.text(key + ":" + "  " + value);
+          });
+      });
+});
        
-//   }
+}
 
 // // From Day 2 Activity 9
 // d3.selectAll("#selDataset").on("change", optionChanged);
