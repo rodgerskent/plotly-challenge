@@ -35,15 +35,10 @@ var form = d3.select("form");
 form.on("submit",runEnter);
 
 function optionChanged() {
-    //d3.event.preventDefault();
-    var inputElement = d3.select("#selDataset");
-    console.log('Selected Subject ID Element')
-    console.log(inputElement);
-    var inputValue = inputElement.property("value");
-    console.log('Selected Subject ID Value')
-    console.log(inputValue);
+    
 
     d3.json("samples.json").then(function(object) {
+             
       console.log("metadata drill");
       console.log(object.metadata);
       console.log("metadata variable below");
@@ -51,7 +46,14 @@ function optionChanged() {
       console.log(metadata)
 
       function fnsampleMeta(metadata) {
-        return metadata.id === 970;
+        //d3.event.preventDefault();
+        var inputElement = d3.select("#selDataset");
+        console.log('Selected Subject ID Element')
+        console.log(inputElement);
+        var inputValue = inputElement.property("value");
+        console.log('Selected Subject ID Value')
+        console.log(inputValue);
+        return metadata.id === parseInt(inputValue);
       }
 
       var sampleMeta = metadata.filter(fnsampleMeta);
