@@ -9,8 +9,6 @@ d3.json("samples.json").then(function(object) {
     var subject = object.names;
     // console.log("Subject Variable");
     // console.log(subject);
-    
-
     // menu.html("");
 
     var menuList = subject;
@@ -79,11 +77,15 @@ function optionChanged() {
       console.log("selected demographics array below")
       console.log(sampleMeta)
 
-      var axisy = sampleSelected.map(samples => samples.otu_ids[0, 10]);
-      console.log("bar chart x-axis stuff")
-      console.log(axisy)
-      var axisx = sampleSelected.map(samples => samples.sample_values[0, 10]);
+      var y = sampleSelected.slice(0, 10);
+      var axisy = y.map(samples => samples.otu_ids);
       console.log("bar chart y-axis stuff")
+      console.log(axisy)
+      
+      var x = sampleSelected.map(samples => samples.sample_values);
+      var axisx = x.slice(0, 10);
+      console.log("bar chart x-axis stuff")
+      console.log(x)
       console.log (axisx)
 
       var trace = {
@@ -103,9 +105,6 @@ function optionChanged() {
 
       Plotly.newPlot("bar", definition, layout);
   
-
-      // menu.html("");
-
       var demographics = d3.select("#sample-metadata")
       sampleMeta.forEach((buttonpicker) => {
           demographics.html("");
