@@ -79,25 +79,26 @@ function optionChanged() {
       console.log("selected demographics array below")
       console.log(sampleMeta)
 
-      var axisx = sampleSelected.map(samples => samples.otu_ids[9]);
+      var axisy = sampleSelected.map(samples => samples.otu_ids[0, 10]);
       console.log("bar chart x-axis stuff")
-      console.log(axisx)
-      var axisy = sampleSelected.map(samples => samples.sample_values[9]);
+      console.log(axisy)
+      var axisx = sampleSelected.map(samples => samples.sample_values[0, 10]);
       console.log("bar chart y-axis stuff")
-      console.log (axisy)
+      console.log (axisx)
 
       var trace = {
         x: axisx,
         y: axisy,
-        type: "bar"
+        type: "bar",
+        orientation: "h"
       };
 
       var definition = [trace];
 
       var layout = {
         title: "Research Results for Selected Study Participant",
-        xaxis: { title: "Otu_Ids" },
-        yaxis: { title: "Sample_Values"}
+        xaxis: { title: "Sample Value" },
+        yaxis: { title: "OTU"}
       };
 
       Plotly.newPlot("bar", definition, layout);
