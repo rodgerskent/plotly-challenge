@@ -77,25 +77,38 @@ function optionChanged() {
       console.log("selected demographics array below")
       console.log(sampleMeta)
 
-      var y = sampleSelected.slice(0, 10);
-      var axisy = y.map(samples => samples.otu_ids);
+      //var axisy = [1,2,3,4]
+      var axisy = sampleSelected.map(samples => samples.otu_ids.slice(0,10));
       console.log("bar chart y-axis stuff")
       console.log(axisy)
+      // var yy = [axisy.toString()]
+      var yy = [axisy]
+      console.log("yy should be here")
+      console.log(yy)
       
-      var x = sampleSelected.map(samples => samples.sample_values);
-      var axisx = x.slice(0, 10);
+      //var axisx = [1,2,3,4]
+      var axisx = sampleSelected.map(samples => samples.sample_values.slice(0,10));
       console.log("bar chart x-axis stuff")
-      console.log(x)
       console.log (axisx)
+      // var xx = [axisx.toString()]
+      var xx = [axisx]
+      console.log("xx should be here")
+      console.log(xx)
+
+      var labels = sampleSelected.map(samples => samples.otu_labels.slice(0,10));
+      console.log("bar labels stuff")
+      console.log (labels)
 
       var trace = {
-        x: axisx,
-        y: axisy,
+        x: xx,
+        y: yy,
+        //text: labels,
         type: "bar",
         orientation: "h"
+        
       };
 
-      var definition = [trace];
+      var data = [trace];
 
       var layout = {
         title: "Research Results for Selected Study Participant",
@@ -103,7 +116,49 @@ function optionChanged() {
         yaxis: { title: "OTU"}
       };
 
-      Plotly.newPlot("bar", definition, layout);
+      Plotly.newPlot("bar", data, layout);
+
+
+      // Bubble chart stuff
+      // var bubbletrace = {
+      //   x: axisy,
+      //   y: axisx,
+      //   text: labels,
+      //   mode: 'markers',
+      //   marker: {
+      //     size: axisx,
+      //     sizemode: 'area'
+      //   }
+      // };
+      
+      
+      // sizeref using above forumla
+      // var desired_maximum_marker_size = 40;
+      // var size = [400, 600, 800, 1000];
+      // var trace4 = {
+      //   x: [1, 2, 3, 4],
+      //   y: [26, 27, 28, 29],
+      //   text: ['A</br>size: 40</br>sixeref: 1.25', 'B</br>size: 60</br>sixeref: 1.25', 'C</br>size: 80</br>sixeref: 1.25', 'D</br>size: 100</br>sixeref: 1.25'],
+      //   mode: 'markers',
+      //   marker: {
+      //     size: size,
+      //     //set 'sizeref' to an 'ideal' size given by the formula sizeref = 2. * max(array_of_size_values) / (desired_maximum_marker_size ** 2)
+      //     sizeref: 2.0 * Math.max(...size) / (desired_maximum_marker_size**2),
+      //     sizemode: 'area'
+      //   }
+      // };
+      
+      // var bubbledata = [bubbletrace];
+      
+      // var layout = {
+      //   title: 'Bubble Chart Size Scaling',
+      //   showlegend: false,
+      //   height: 600,
+      //   width: 600
+      // };
+      
+      // Plotly.newPlot('myDiv', bubbledata, layout);
+      // End bubble chart stuff
   
       var demographics = d3.select("#sample-metadata")
       sampleMeta.forEach((buttonpicker) => {
