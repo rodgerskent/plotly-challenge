@@ -81,7 +81,8 @@ function optionChanged() {
       var axisy = sampleSelected.map(samples => samples.otu_ids.slice(0,10).reverse());
       console.log("bar chart y-axis stuff")
       console.log(axisy)
-      var yy = axisy.toString()
+      var yy = axisy.toString(4)
+      console.log(yy)
       //var yy = [axisy]
       //console.log("yy should be here")
       //console.log(yy)
@@ -103,7 +104,7 @@ function optionChanged() {
         x: axisx[0],
         y: yy[0],
         text: yy[0],
-        name: yy[0],
+        // name: yy[0],
         type: "bar",
         orientation: "h"
         
