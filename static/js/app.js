@@ -77,32 +77,33 @@ function optionChanged() {
       console.log("selected demographics array below")
       console.log(sampleMeta)
 
-      //var axisy = [1,2,3,4]
-      var axisy = sampleSelected.map(samples => samples.otu_ids.slice(0,10));
+      // var axisy = [1,2,3,4]
+      var axisy = sampleSelected.map(samples => samples.otu_ids.slice(0,10).reverse());
       console.log("bar chart y-axis stuff")
       console.log(axisy)
-      // var yy = [axisy.toString()]
-      var yy = [axisy]
-      console.log("yy should be here")
-      console.log(yy)
+      var yy = axisy.toString()
+      //var yy = [axisy]
+      //console.log("yy should be here")
+      //console.log(yy)
       
-      //var axisx = [1,2,3,4]
-      var axisx = sampleSelected.map(samples => samples.sample_values.slice(0,10));
+      // var axisx = [1,2,3,4]
+      var axisx = sampleSelected.map(samples => samples.sample_values.slice(0,10).reverse());
       console.log("bar chart x-axis stuff")
       console.log (axisx)
       // var xx = [axisx.toString()]
-      var xx = [axisx]
-      console.log("xx should be here")
-      console.log(xx)
+      //var xx = [axisx]
+      //console.log("xx should be here")
+      //console.log(xx)
 
       var labels = sampleSelected.map(samples => samples.otu_labels.slice(0,10));
       console.log("bar labels stuff")
       console.log (labels)
 
       var trace = {
-        x: xx,
-        y: yy,
-        //text: labels,
+        x: axisx[0],
+        y: yy[0],
+        text: yy[0],
+        name: yy[0],
         type: "bar",
         orientation: "h"
         
@@ -120,16 +121,17 @@ function optionChanged() {
 
 
       // Bubble chart stuff
-      // var bubbletrace = {
-      //   x: axisy,
-      //   y: axisx,
-      //   text: labels,
-      //   mode: 'markers',
-      //   marker: {
-      //     size: axisx,
-      //     sizemode: 'area'
-      //   }
-      // };
+      var bubbletrace = {
+        x: axisy[0],
+        y: axisx[0],
+        text: labels[0],
+        mode: 'markers',
+        marker: {
+          size: axisx[0],
+          sizemode: 'area',
+          color: axisy[0],
+        }
+      };
       
       
       // sizeref using above forumla
@@ -148,16 +150,16 @@ function optionChanged() {
       //   }
       // };
       
-      // var bubbledata = [bubbletrace];
+      var bubbledata = [bubbletrace];
       
-      // var layout = {
-      //   title: 'Bubble Chart Size Scaling',
-      //   showlegend: false,
-      //   height: 600,
-      //   width: 600
-      // };
+      var layout = {
+        title: 'Bubble Chart Size Scaling',
+        showlegend: false,
+        height: 600,
+        width: 600
+      };
       
-      // Plotly.newPlot('myDiv', bubbledata, layout);
+      Plotly.newPlot('bubble', bubbledata, layout);
       // End bubble chart stuff
   
       var demographics = d3.select("#sample-metadata")
