@@ -80,30 +80,32 @@ function optionChanged() {
       // var axisy = [1,2,3,4]
       var axisy = sampleSelected.map(samples => samples.otu_ids.slice(0,10).reverse());
       console.log("bar chart y-axis stuff")
-      console.log(axisy)
-      var yy = axisy.toString(4)
-      console.log(yy)
-      //var yy = [axisy]
-      //console.log("yy should be here")
+      //console.log(axisy)
+      //var yy = axisy.toString()
       //console.log(yy)
-      
+      var onesampleSelected = sampleSelected[0]
+      console.log(onesampleSelected)
+      var yyy = onesampleSelected.otu_ids.slice(0,10)
+      console.log(yyy)
+      var otuforY = yyy.map(item => `OTU ${item}`).reverse()
+      console.log('otuforY here')
+      console.log(otuforY)
+            
       // var axisx = [1,2,3,4]
       var axisx = sampleSelected.map(samples => samples.sample_values.slice(0,10).reverse());
       console.log("bar chart x-axis stuff")
       console.log (axisx)
-      // var xx = [axisx.toString()]
-      //var xx = [axisx]
-      //console.log("xx should be here")
-      //console.log(xx)
+     
 
       var labels = sampleSelected.map(samples => samples.otu_labels.slice(0,10));
       console.log("bar labels stuff")
       console.log (labels)
+    
 
       var trace = {
         x: axisx[0],
-        y: yy[0],
-        text: yy[0],
+        y: otuforY,
+        text: labels,
         // name: yy[0],
         type: "bar",
         orientation: "h"
@@ -157,7 +159,7 @@ function optionChanged() {
         title: 'Bubble Chart Size Scaling',
         showlegend: false,
         height: 600,
-        width: 600
+        width: 750
       };
       
       Plotly.newPlot('bubble', bubbledata, layout);
