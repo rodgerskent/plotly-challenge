@@ -123,7 +123,7 @@ function optionChanged() {
       var data = [trace];
 
       var layout = {
-        title: "Top 10 OTU results for Selected Study Participant",
+        title: "Top 10 OTU Results for Selected Study Participant",
         xaxis: { title: "Sample Value" },
         // yaxis: { title: "OTU"}
       };
